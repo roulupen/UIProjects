@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Closure Example</title>
+	<script type="text/javascript">
+	(function(){
+
+		var spinner = (function(){
+			var cntr = 0;
+
+			var functions = {
+				up: function() {
+					return ++cntr;
+				},
+				down: function() {
+					return --cntr;
+				}
+			}
+
+			return functions;
+		})();
+
+		window.addEventListener("DOMContentLoaded", init);
+
+		function init() {
+			document.getElementById("increment-spinner").addEventListener("click", upSpinner);
+			document.getElementById("decrement-spinner").addEventListener("click", downSpinner);
+		}
+
+		function upSpinner() {
+			displayCntr(spinner.up());
+		}
+
+		function downSpinner() {
+			displayCntr(spinner.down());
+		}
+
+		function displayCntr(cntrValue) {
+			document.getElementById("display-cntr").innerHTML = cntrValue;
+		}
+
+	})();
+	</script>
+</head>
+<body>
+	Current Spin Value: <div id="display-cntr">0</div>
+	<button id="increment-spinner">Increase</button>
+	<button id="decrement-spinner">Decrease</button>
+</body>
+</html>
